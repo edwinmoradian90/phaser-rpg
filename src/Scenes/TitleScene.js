@@ -1,26 +1,14 @@
 import 'phaser';
 import config from '../Config/config';
-import Button from '../Objects/Button';
+import GameButton from '../Objects/GameButton';
+import { titleScene } from '../Config/style';
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {
     super('Title');
-    this.textConfig = {
-      title: {
-        color: '#502659',
-        fontSize: '80px',
-        fontFamily: 'Calibiri',
-      },
-      menu: {
-        color: '#fff',
-        fontSize: '30px',
-        fontFamily: 'Calibiri'
-      }
-    }
   }
 
   preload() {
-    this.load.audio('intro', 'assets/Intro.mp3');
     this.load.image('background', 'assets/parallax_mountain_pack/layers/bg.png');
     this.load.image('foregroundTrees', 'assets/parallax_mountain_pack/layers/foreground-trees.png');
     this.load.image('mountain-far', 'assets/parallax_mountain_pack/layers/mountain-far.png');
@@ -61,19 +49,17 @@ export default class TitleScene extends Phaser.Scene {
     ).setDisplaySize(config.width + 200, config.height / 2 + 140)
 
     // Game
-    this.gameButton = new Button(this, config.width / 2 - 100, config.height / 2 + 50, 'blueButton1', 'blueButton2', 'Play', 'Game');
-
-    // Options
-    this.optionsButton = new Button(this, config.width / 2 + 100, config.height / 2 + 50, 'blueButton1', 'blueButton2', 'Options', 'Options');
+    this.startButton = new GameButton(this, 'Intro', 365, 300, 'START', titleScene.menu);
+    this.optionsButton = new GameButton(this, 'Options', 352, 350, 'OPTIONS', titleScene.menu)
 
     this.model = this.sys.game.globals.model;
     if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
-      this.bgMusic = this.sound.add('intro', { volume: 0.4, loop: true });
+      this.bgMusic = this.sound.add('bgMusic', { volume: 0.4, loop: true });
       this.bgMusic.play();
       this.model.bgMusicPlaying = true;
       this.sys.game.globals.bgMusic = this.bgMusic;
     }
-    this.text = this.add.text(250, 200, 'MILEUD', this.textConfig.title);
+    this.text = this.add.text(250, 200, 'MILEUD', titleScene.title);
   }
 
   update() {
