@@ -23,8 +23,8 @@ export default class GameScene extends Phaser.Scene {
     const objects = map.createStaticLayer('objects', tileset, 0, 0).setDepth(2);
     const objectsTop = map.createStaticLayer('objectsTop', tileset, 0, 0);
 
-    this.player = this.physics.add.sprite(200, 450, 'king');
-    this.enemy = this.physics.add.sprite(735, 380, 'mage').setFrame(18).setDepth(2);
+    this.player = this.physics.add.sprite(200, 450, 'mileud');
+    this.enemy = this.physics.add.sprite(735, 380, 'jack').setFrame(18).setDepth(2);
     this.player.setCollideWorldBounds(true);
     this.enemy.body.setImmovable(true);
     this.physics.add.overlap(this.player, this.enemy, () => {
@@ -44,28 +44,28 @@ export default class GameScene extends Phaser.Scene {
 
     this.anims.create({
       key: 'left',
-      frames: this.anims.generateFrameNumbers('king', { start: 9, end: 17 }),
+      frames: this.anims.generateFrameNumbers('mileud', { start: 9, end: 17 }),
       frameRate: 8,
       repeat: -1,
     });
 
     this.anims.create({
       key: 'right',
-      frames: this.anims.generateFrameNumbers('king', { start: 27, end: 35 }),
+      frames: this.anims.generateFrameNumbers('mileud', { start: 27, end: 35 }),
       frameRate: 8,
       repeat: -1,
     });
 
     this.anims.create({
       key: 'up',
-      frames: this.anims.generateFrameNumbers('king', { start: 0, end: 8 }),
+      frames: this.anims.generateFrameNumbers('mileud', { start: 0, end: 8 }),
       frameRate: 8,
       repeat: -1
     });
 
     this.anims.create({
       key: 'down',
-      frames: this.anims.generateFrameNumbers('king', { start: 18, end: 25 }),
+      frames: this.anims.generateFrameNumbers('mileud', { start: 18, end: 25 }),
       frameRate: 8,
       repeat: -1
     });

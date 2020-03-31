@@ -80,8 +80,10 @@ export default class PreloaderScene extends Phaser.Scene {
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
     // load assets needed in our game
-    this.load.spritesheet('king', 'assets/spritesheets/characters.png', { frameWidth: 64, frameHeight: 64 });
-    this.load.spritesheet('mage', 'assets/spritesheets/mage.png', { frameWidth: 64, frameHeight: 64 });
+    this.load.spritesheet('mileud', 'assets/spritesheets/mileud.png', { frameWidth: 64, frameHeight: 64 });
+    this.load.spritesheet('mileudFall', 'assets/spritesheets/mileudFall.png', { frameWidth: 64, frameHeight: 64 });
+    this.load.spritesheet('jack', 'assets/spritesheets/jack.png', { frameWidth: 64, frameHeight: 64 });
+    this.load.spritesheet('jackFall', 'assets/spritesheets/jackFall.png', { frameWidth: 64, frameHeight: 64 });
     this.load.image('phaserLogo', 'assets/logo.png');
     this.load.image('box', 'assets/ui/grey_box.png');
     this.load.image('checkedBox', 'assets/ui/blue_boxCheckmark.png');
