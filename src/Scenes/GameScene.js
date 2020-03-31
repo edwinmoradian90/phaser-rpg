@@ -5,6 +5,7 @@ export default class GameScene extends Phaser.Scene {
     super('Game');
     this.player;
     this.cursors;
+    this.score = 0;
   }
 
   preload() {
@@ -30,7 +31,6 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.enemy, () => {
       this.levelOneMusic.stop();
       this.scene.start('Battle');
-      console.log('bump');
     });
 
     objects.setCollisionByProperty({ collides: true });
@@ -72,6 +72,8 @@ export default class GameScene extends Phaser.Scene {
 
     this.levelOneMusic = this.sound.add('levelOneMusic', { volume: 0.4, loop: true });
     this.levelOneMusic.play();
+
+    this.scoreText = this.add.text(10, 10, `Score: ${this.score}`, { fontSize: '28px', color: 'white', fontFamily: 'Arial' }).setDepth(3).setScrollFactor(0);
   }
 
   update() {
