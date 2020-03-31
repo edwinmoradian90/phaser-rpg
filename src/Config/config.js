@@ -5,10 +5,12 @@ export default {
   parent: 'phaser-example',
   width: 800,
   height: 600,
+  pixelArt: true,
+  roundPixels: true,
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 100 },
+      gravity: { y: 0 },
       debug: false
     }
   }

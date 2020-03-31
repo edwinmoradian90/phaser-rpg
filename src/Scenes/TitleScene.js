@@ -19,9 +19,9 @@ export default class TitleScene extends Phaser.Scene {
   create() {
     this.add.image(
       config.width / 2,
-      config.height / 2 - 50,
+      config.height / 2 - 70,
       'background'
-    ).setDisplaySize(config.width, config.height / 2 + 200)
+    ).setDisplaySize(config.width, config.height / 2 + 180)
 
     this.mountains = this.add.tileSprite(
       config.width / 2,
