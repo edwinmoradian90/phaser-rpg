@@ -6,7 +6,6 @@ import BootScene from './Scenes/BootScene';
 import BattleScene from './Scenes/BattleScene';
 import PreloaderScene from './Scenes/PreloaderScene';
 import TitleScene from './Scenes/TitleScene';
-import CreditsScene from './Scenes/CreditsScene';
 import LeaderboardScene from './Scenes/LeaderboardScene';
 import Model from './Model';
 
@@ -20,7 +19,6 @@ class Game extends Phaser.Game {
     this.scene.add('Boot', BootScene);
     this.scene.add('Preloader', PreloaderScene);
     this.scene.add('Title', TitleScene);
-    this.scene.add('Credits', CreditsScene);
     this.scene.add('IntroScene', IntroScene);
     this.scene.add('Game', GameScene);
     this.scene.add('Battle', BattleScene);
