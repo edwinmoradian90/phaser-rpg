@@ -1,19 +1,18 @@
-import 'phaser';
+import Phaser from 'phaser';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
-    this.player;
-    this.cursors;
+    this.player = null;
+    this.cursors = null;
     this.user = 'testing';
     this.score = 0;
   }
 
   init(data) {
-    console.log(data);
     this.user = data.user;
     this.score = data.score || 0;
-  };
+  }
 
   preload() {
     this.load.image('tiles', '../assets/tilesets/terrain_atlas.png');
@@ -26,10 +25,10 @@ export default class GameScene extends Phaser.Scene {
 
     const map = this.make.tilemap({ key: 'map' });
     const tileset = map.addTilesetImage('world_tiles', 'tiles');
-    const base = map.createStaticLayer('base', tileset, 0, 0);
-    const top = map.createStaticLayer('top', tileset, 0, 0);
-    const objects = map.createStaticLayer('objects', tileset, 0, 0).setDepth(2);
-    const objectsTop = map.createStaticLayer('objectsTop', tileset, 0, 0);
+    map.createStaticLayer('base', tileset, 0, 0);
+    map.createStaticLayer('top', tileset, 0, 0);
+    const objects = map.createStaticLayer('objects', tileset, 0, 0).setDepth(1);
+    map.createStaticLayer('objectsTop', tileset, 0, 0).setDepth(1);
 
     this.player = this.physics.add.sprite(200, 450, 'mileud');
     this.enemy = this.physics.add.sprite(735, 380, 'jack').setFrame(18).setDepth(2);
@@ -67,14 +66,14 @@ export default class GameScene extends Phaser.Scene {
       key: 'up',
       frames: this.anims.generateFrameNumbers('mileud', { start: 0, end: 8 }),
       frameRate: 8,
-      repeat: -1
+      repeat: -1,
     });
 
     this.anims.create({
       key: 'down',
       frames: this.anims.generateFrameNumbers('mileud', { start: 18, end: 25 }),
       frameRate: 8,
-      repeat: -1
+      repeat: -1,
     });
 
     this.levelOneMusic = this.sound.add('levelOneMusic', { volume: 0.4, loop: true });
@@ -84,32 +83,27 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
-    this.cursors = this.input.keyboard.createCursorKeys()
+    this.cursors = this.input.keyboard.createCursorKeys();
     if (this.cursors.left.isDown) {
       this.player.body.stop();
       this.player.body.setVelocityX(-160);
       this.player.anims.play('left', true);
-    }
-    else if (this.cursors.right.isDown) {
+    } else if (this.cursors.right.isDown) {
       this.player.body.stop();
       this.player.body.setVelocityX(160);
       this.player.anims.play('right', true);
-    }
-    else if (this.cursors.up.isDown) {
+    } else if (this.cursors.up.isDown) {
       this.player.body.stop();
       this.player.body.setVelocityY(-160);
       this.player.anims.play('up', true);
-    }
-    else if (this.cursors.down.isDown) {
+    } else if (this.cursors.down.isDown) {
       this.player.body.stop();
       this.player.body.setVelocityY(160);
       this.player.anims.play('down', true);
-    }
-    else {
+    } else {
       this.player.body.stop();
       this.player.anims.stop();
       this.player.setFrame(19);
     }
-
   }
-};
+}

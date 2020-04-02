@@ -1,8 +1,8 @@
-import 'phaser';
+import Phaser from 'phaser';
+import axios from 'axios';
 import config from '../Config/config';
 import GameButton from '../Objects/GameButton';
 import { titleScene } from '../Config/style';
-import axios from 'axios';
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {
@@ -12,26 +12,25 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   postGameInfo() {
-    const config = {
+    const configHeader = {
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     };
 
     const body = {
-      'name': this.user,
-      'score': this.score
+      name: this.user,
+      score: this.score,
     };
 
     axios.post(
       'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/InhJtVWxBftuCrz5KBcL/scores',
       body,
-      config
+      configHeader,
     )
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-    console.log('loaded');
-  };
+      .then((res) => res)
+      .catch((err) => new Error(err));
+  }
 
   preload() {
     this.load.image('background', 'assets/parallax_mountain_pack/layers/bg.png');
@@ -52,12 +51,12 @@ export default class TitleScene extends Phaser.Scene {
       type: 'text',
       placeholder: 'Name',
       fontSize: '20px',
-      borderBottom: `3px solid ${titleScene.title.color}`
+      borderBottom: `3px solid ${titleScene.title.color}`,
     })
       .setOrigin(0.5)
-      .on('textchange', function (inputText) {
+      .on('textchange', () => {
         printText.text = inputText.text;
-      })
+      });
 
     printText.text = inputText.text;
 
@@ -65,8 +64,8 @@ export default class TitleScene extends Phaser.Scene {
     this.add.image(
       config.width / 2,
       config.height / 2 - 70,
-      'background'
-    ).setDisplaySize(config.width, config.height / 2 + 180)
+      'background',
+    ).setDisplaySize(config.width, config.height / 2 + 180);
 
     this.mountains = this.add.tileSprite(
       config.width / 2,
@@ -74,29 +73,28 @@ export default class TitleScene extends Phaser.Scene {
       config.width,
       200,
       'mountains',
-      0
-    ).setDisplaySize(config.width, 400)
+      0,
+    ).setDisplaySize(config.width, 400);
 
     this.trees = this.add.tileSprite(
       config.width / 2,
       config.height / 2,
       config.width,
       150,
-      'trees'
-    ).setDisplaySize(config.width + 200, config.height / 2 + 300)
+      'trees',
+    ).setDisplaySize(config.width + 200, config.height / 2 + 300);
 
     this.foregroundTrees = this.add.tileSprite(
       config.width / 2,
       config.height / 2 + 100,
       config.width,
       170,
-      'foregroundTrees'
-    ).setDisplaySize(config.width + 200, config.height / 2 + 140)
+      'foregroundTrees',
+    ).setDisplaySize(config.width + 200, config.height / 2 + 140);
 
     // Game
     this.submitButton = this.add.text(400, 300, 'Submit Name', titleScene.menu).setInteractive().setOrigin(0.5);
     this.submitButton.on('pointerdown', () => {
-      console.log(printText.text)
       if (printText.text.length > 0) {
         this.user = printText.text;
         const data = { user: this.user };
@@ -116,8 +114,8 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   update() {
-    this.mountains.tilePositionX += .2;
-    this.trees.tilePositionX += .4;
-    this.foregroundTrees.tilePositionX += .8;
+    this.mountains.tilePositionX += 0.2;
+    this.trees.tilePositionX += 0.4;
+    this.foregroundTrees.tilePositionX += 0.8;
   }
-};
+}

@@ -8,13 +8,13 @@ export default {
   pixelArt: true,
   roundPixels: true,
   dom: {
-    createContainer: true
+    createContainer: true,
   },
   physics: {
     default: 'arcade',
     arcade: {
       gravity: { y: 0 },
-      debug: false
-    }
-  }
+      debug: false,
+    },
+  },
 };
