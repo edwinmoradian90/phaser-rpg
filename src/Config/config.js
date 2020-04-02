@@ -7,6 +7,9 @@ export default {
   height: 600,
   pixelArt: true,
   roundPixels: true,
+  dom: {
+    createContainer: true
+  },
   physics: {
     default: 'arcade',
     arcade: {

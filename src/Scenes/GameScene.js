@@ -5,8 +5,15 @@ export default class GameScene extends Phaser.Scene {
     super('Game');
     this.player;
     this.cursors;
+    this.user = 'testing';
     this.score = 0;
   }
+
+  init(data) {
+    console.log(data);
+    this.user = data.user;
+    this.score = data.score || 0;
+  };
 
   preload() {
     this.load.image('tiles', '../assets/tilesets/terrain_atlas.png');
@@ -30,7 +37,7 @@ export default class GameScene extends Phaser.Scene {
     this.enemy.body.setImmovable(true);
     this.physics.add.overlap(this.player, this.enemy, () => {
       this.levelOneMusic.stop();
-      this.scene.start('Battle');
+      this.scene.start('Battle', { user: this.user, score: this.score });
     });
 
     objects.setCollisionByProperty({ collides: true });

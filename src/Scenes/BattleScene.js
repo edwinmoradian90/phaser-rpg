@@ -8,7 +8,19 @@ export default class BattleScene extends Phaser.Scene {
         this.jackHealth;
         this.mileudHealthStatus;
         this.jackHealthStatus;
-    }
+        this.user;
+        this.score;
+    };
+
+    endBattle() {
+        this.cameras.main.fadeOut(2000);
+        this.scene.start('Leaderboard', { user: this.user, score: this.score });
+        this.battleMusic.stop();
+    };
+
+    updateScore() {
+        this.score += 1;
+    };
 
     initializeHealth() {
         this.jackHealth = 100;
@@ -39,14 +51,13 @@ export default class BattleScene extends Phaser.Scene {
         this.time.addEvent({
             delay: 2000,
             callback: () => {
-                this.cameras.main.fadeOut(2000);
-                this.scene.start('Game');
-                this.battleMusic.stop();
+                this.endBattle();
             }
         });
     };
 
     jackDefeated() {
+        this.updateScore();
         this.jack.destroy();
         this.mileud.destroy();
         this.jack = this.physics.add.sprite(600, 300, 'jackFall').setFrame(4).setDisplaySize(128, 128);
@@ -58,11 +69,14 @@ export default class BattleScene extends Phaser.Scene {
         this.time.addEvent({
             delay: 2000,
             callback: () => {
-                this.cameras.main.fadeOut(2000);
-                this.scene.start('Game');
-                this.battleMusic.stop();
+                this.endBattle();
             }
         });
+    };
+
+    init(data) {
+        this.user = data.user;
+        this.score = data.score;
     };
 
     create() {
@@ -87,7 +101,7 @@ export default class BattleScene extends Phaser.Scene {
             this.jackHealth -= 20;
             this.turn = false;
         });
-    }
+    };
 
     update() {
         if (this.turn) {
@@ -111,5 +125,5 @@ export default class BattleScene extends Phaser.Scene {
         }
 
         this.updateHealthStatus();
-    }
+    };
 };

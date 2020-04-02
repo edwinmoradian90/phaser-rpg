@@ -27,4 +27,4 @@ export const introScene = {
         fontSize: '26px',
         fontFamily: 'Calibiri'
     }
-}
+};
