@@ -1,6 +1,6 @@
 # Mileud - Phaser RPG
 
-[View Game]()
+[View Game](https://wizardly-villani-8dc33a.netlify.com/)
 
 This is the basic start of a RPG built with Phaser 3.
 
@@ -49,7 +49,7 @@ npm start
 
 This will start the project so you can view it [here](https://localhost:8000).
 
-If you just want to check out the game without installing it, go [here]().
+If you just want to check out the game without installing it, go [here](https://wizardly-villani-8dc33a.netlify.com/).
 
 ## Built With
 
